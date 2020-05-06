@@ -6,10 +6,15 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using Plugin.NFC;
+using Android.Content;
+using Android.Nfc;
+using System.Threading.Tasks;
 
 namespace KitchenZapp.Droid
 {
     [Activity(Label = "KitchenZapp", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [IntentFilter(new[] { NfcAdapter.ActionNdefDiscovered }, Categories = new[] { Intent.CategoryDefault }, DataMimeType = "application/com.companyname.KitchenZapp")]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)
@@ -18,6 +23,13 @@ namespace KitchenZapp.Droid
             ToolbarResource = Resource.Layout.Toolbar;
 
             base.OnCreate(savedInstanceState);
+
+            // Plugin NFC: Initialization
+            CrossNFC.Init(this);
+            Task.Run(() =>
+            {
+                CrossNFC.Current.StartListening();
+            });
 
             global::Xamarin.Forms.Forms.SetFlags("CollectionView_Experimental");
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
@@ -29,6 +41,14 @@ namespace KitchenZapp.Droid
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
 
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+
+        protected override void OnNewIntent(Intent intent)
+        {
+            base.OnNewIntent(intent);
+
+            // Plugin NFC: Tag Discovery Interception
+            CrossNFC.OnNewIntent(intent);
         }
     }
 }

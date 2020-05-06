@@ -3,6 +3,9 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using KitchenZapp.Services;
 using KitchenZapp.Views;
+using Plugin.NFC;
+using System.Threading.Tasks;
+using System.Threading;
 
 namespace KitchenZapp
 {
