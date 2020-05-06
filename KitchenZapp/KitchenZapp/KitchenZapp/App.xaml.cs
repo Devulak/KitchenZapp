@@ -22,6 +22,10 @@ namespace KitchenZapp
 
         protected override void OnStart()
         {
+            Task.Run(() =>
+            {
+                CrossNFC.Current.StartListening();
+            });
         }
 
         protected override void OnSleep()
@@ -30,6 +34,10 @@ namespace KitchenZapp
 
         protected override void OnResume()
         {
+            Task.Run(() =>
+            {
+                CrossNFC.Current.StartListening();
+            });
         }
     }
 }

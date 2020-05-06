@@ -17,7 +17,7 @@ namespace KitchenZapp.ViewModels
 
         public ItemsViewModel()
         {
-            Title = "Browse";
+            Title = "Residents";
             Items = new ObservableCollection<Account>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
 

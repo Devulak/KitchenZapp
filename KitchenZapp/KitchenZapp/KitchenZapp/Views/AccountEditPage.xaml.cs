@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KitchenZapp.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,9 +13,11 @@ namespace KitchenZapp.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AccountEditPage : ContentPage
     {
-        public AccountEditPage()
+        public AccountEditPage(ItemDetailViewModel viewModel)
         {
             InitializeComponent();
+
+            BindingContext = viewModel;
         }
     }
 }

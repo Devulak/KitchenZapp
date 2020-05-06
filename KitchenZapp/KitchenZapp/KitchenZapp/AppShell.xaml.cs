@@ -1,8 +1,11 @@
-﻿using KitchenZapp.Views;
+﻿using KitchenZapp.Models;
+using KitchenZapp.ViewModels;
+using KitchenZapp.Views;
 using Plugin.NFC;
 using System;
 using System.Collections.Generic;
-
+using System.Linq;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace KitchenZapp
@@ -13,25 +16,36 @@ namespace KitchenZapp
         {
             InitializeComponent();
 
+            //if (CrossNFC.IsSupported)
+            //{
+            //    if (CrossNFC.Current.IsAvailable)
+            //    {
+            //        if (CrossNFC.Current.IsEnabled)
+            //        {
+            //            CrossNFC.Current.OnMessageReceived += Current_OnMessageReceived;
+            //        }
+            //    }
+            //}
             CrossNFC.Current.OnMessageReceived += OnMessageReceived;
         }
 
         private async void OnMessageReceived(ITagInfo tagInfo)
         {
-            int tagId = BitConverter.ToInt32(tagInfo.Identifier, 0);
+            int tagID = BitConverter.ToInt32(tagInfo.Identifier, 0);
+            await DisplayAlert("NFC chip found!", tagID.ToString(), "OK");
 
-            await Navigation.PushModalAsync(new NavigationPage(new NewItemPage()));
+            ItemsViewModel itemsViewModel = new ItemsViewModel();
 
-            /*User user = ((UsersViewModel)BindingContext).GetFirstOrDefaultUserWithTagId(tagId);
+            Account account = itemsViewModel.Items.FirstOrDefault(o => o.TagID == tagID);
 
-            if (user != null)
+            if (account != null) // Found
             {
-                await Navigation.PushAsync(new PersonalUsage((UsersViewModel)BindingContext, user));
+                await Navigation.PushModalAsync(new NavigationPage(new AccountEditPage(new ItemDetailViewModel(account))));
             }
-            else
+            else // Not found, open register window
             {
-                await Navigation.PushAsync(new Registation((UsersViewModel)BindingContext, tagId));
-            }*/
+                await Navigation.PushModalAsync(new NavigationPage(new NewItemPage()));
+            }
         }
     }
 }
