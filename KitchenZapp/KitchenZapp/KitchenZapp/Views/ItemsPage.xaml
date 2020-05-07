@@ -20,62 +20,74 @@
                 <Setter Property="CornerRadius" Value="5" />
                 <Setter Property="Padding" Value="0" />
                 <Setter Property="Margin" Value="0" />
+                <Setter Property="HasShadow" Value="False" />
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <RefreshView IsRefreshing="{Binding IsBusy, Mode=TwoWay}" Command="{Binding LoadItemsCommand}">
-        <CollectionView x:Name="ItemsCollectionView"
-                ItemsSource="{Binding Items}">
-            <d:CollectionView.ItemsSource>
-                <x:Array Type="{x:Type x:String}">
-                    <x:String>First Item</x:String>
-                    <x:String>Second Item</x:String>
-                    <x:String>Third Item</x:String>
-                    <x:String>Fourth Item</x:String>
-                    <x:String>Fifth Item</x:String>
-                    <x:String>Sixth Item</x:String>
-                </x:Array>
-            </d:CollectionView.ItemsSource>
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <ContentView Padding="20">
-                        <Frame Style="{DynamicResource ValueContainerStyle}" Padding="10">
-                            <StackLayout>
-                                <Label Text="{Binding PersonalName}"
-                                       d:Text="{Binding .}"
-                                       LineBreakMode="NoWrap"
-                                       Style="{DynamicResource ListItemTextStyle}" 
-                                       FontSize="16" />
-                                <Label Text="{Binding Balance, StringFormat='{0:N2} kr'}"
-                                       d:Text="Account balance"
-                                       LineBreakMode="NoWrap"
-                                       Style="{DynamicResource ListItemDetailTextStyle}"
-                                       FontSize="13"
-                                       TextColor="Green">
-                                    <Label.Triggers>
-                                        <DataTrigger TargetType="Label"
-                                                     Binding="{Binding IsBalanceNegative}"
-                                                     Value="true">
-                                            <Setter Property="TextColor"
-                                                    Value="Red" />
-                                        </DataTrigger>
-                                        <DataTrigger TargetType="Label"
-                                                     Binding="{Binding Balance}"
-                                                     Value="0">
-                                            <Setter Property="TextColor"
-                                                    Value="Gray" />
-                                        </DataTrigger>
-                                    </Label.Triggers>
-                                </Label>
-                                <StackLayout.GestureRecognizers>
+    <ContentView Padding="10">
+        <RefreshView IsRefreshing="{Binding IsBusy, Mode=TwoWay}" Command="{Binding LoadItemsCommand}">
+            <CollectionView x:Name="ItemsCollectionView"
+                    ItemsSource="{Binding Items}">
+                <d:CollectionView.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>First Item</x:String>
+                        <x:String>Second Item</x:String>
+                        <x:String>Third Item</x:String>
+                        <x:String>Fourth Item</x:String>
+                        <x:String>Fifth Item</x:String>
+                        <x:String>Sixth Item</x:String>
+                    </x:Array>
+                </d:CollectionView.ItemsSource>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <ContentView Padding="10">
+                            <Frame Style="{DynamicResource ValueContainerStyle}" Padding="15">
+                                <StackLayout Orientation="Horizontal" Spacing="15">
+                                    <Frame BackgroundColor="#edf0f4" Padding="5,10" CornerRadius="5">
+                                        <Label Text="{Binding DoorNumber}"
+                                               FontSize="Default"
+                                               TextColor="#8c9099"
+                                               FontAttributes="Bold" />
+                                    </Frame>
+                                    <Label Text="{Binding PersonalName}"
+                                           FontSize="Medium"
+                                           FontAttributes="Bold"
+                                           TextColor="#67696d"
+                                           VerticalOptions="FillAndExpand"
+                                           VerticalTextAlignment="Center" />
+                                    <Label Text="{Binding Balance, StringFormat='{0:N2} kr'}"
+                                           FontSize="Small"
+                                           TextColor="#278cff"
+                                           FontAttributes="Bold"
+                                           HorizontalOptions="FillAndExpand"
+                                           HorizontalTextAlignment="End"
+                                           VerticalOptions="FillAndExpand"
+                                           VerticalTextAlignment="Center">
+                                        <Label.Triggers>
+                                            <DataTrigger TargetType="Label"
+                                                         Binding="{Binding IsBalanceNegative}"
+                                                         Value="true">
+                                                <Setter Property="TextColor"
+                                                        Value="#ff8096" />
+                                            </DataTrigger>
+                                            <DataTrigger TargetType="Label"
+                                                         Binding="{Binding Balance}"
+                                                         Value="0">
+                                                <Setter Property="TextColor"
+                                                        Value="Gray" />
+                                            </DataTrigger>
+                                        </Label.Triggers>
+                                    </Label>
+                                </StackLayout>
+                                <Frame.GestureRecognizers>
                                     <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OnItemSelected"></TapGestureRecognizer>
-                                </StackLayout.GestureRecognizers>
-                            </StackLayout>
-                        </Frame>
-                    </ContentView>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-    </RefreshView>
+                                </Frame.GestureRecognizers>
+                            </Frame>
+                        </ContentView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+    </ContentView>
 </ContentPage>
