@@ -1,4 +1,5 @@
 ﻿using KitchenZapp.Models;
+using KitchenZapp.Services;
 using KitchenZapp.ViewModels;
 using KitchenZapp.Views;
 using Plugin.NFC;
@@ -36,7 +37,9 @@ namespace KitchenZapp
 
             ItemsViewModel itemsViewModel = new ItemsViewModel();
 
-            Account account = itemsViewModel.Items.FirstOrDefault(o => o.TagID == tagID);
+            IDataStore<Account> dataStore = DependencyService.Get<IDataStore<Account>>();
+            IEnumerable<Account> items = await dataStore.GetItemsAsync(true);
+            Account account = items.FirstOrDefault(o => o.TagID == tagID);
 
             if (account != null) // Found
             {

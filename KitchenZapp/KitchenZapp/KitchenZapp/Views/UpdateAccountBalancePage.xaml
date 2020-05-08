@@ -4,12 +4,58 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="KitchenZapp.Views.UpdateAccountBalancePage">
+             x:Class="KitchenZapp.Views.UpdateAccountBalancePage"
+             BackgroundColor="#f4f6fc">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout Spacing="20" Padding="20">
+            <Frame Style="{DynamicResource LightFrame}">
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Balance" FontSize="Medium" />
+                    <Label Text="{Binding Item.Balance, StringFormat='{0:N2} kr'}" d:Text="0.00 kr" FontAttributes="Bold" FontSize="Medium" HorizontalTextAlignment="End" HorizontalOptions="FillAndExpand" TextColor="#278cff">
+                        <Label.Triggers>
+                            <DataTrigger TargetType="Label" Binding="{Binding Item.IsBalanceNegative}" Value="True">
+                                <Setter Property="TextColor" Value="Red" />
+                            </DataTrigger>
+                            <DataTrigger TargetType="Label" Binding="{Binding Item.Balance}" Value="0">
+                                <Setter Property="TextColor" Value="Gray" />
+                            </DataTrigger>
+                        </Label.Triggers>
+                    </Label>
+                </StackLayout>
+            </Frame>
+            <Frame Style="{DynamicResource LightFrame}" Padding="0">
+                <StackLayout Orientation="Horizontal">
+                    <Frame BackgroundColor="Red">
+                        <Label Text="-" FontAttributes="Bold" FontSize="Large" TextColor="White" />
+                    </Frame>
+                    <Label Text="Beer" HorizontalOptions="FillAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" />
+                    <Frame HorizontalOptions="End" BackgroundColor="Green">
+                        <Label Text="+" FontAttributes="Bold" FontSize="Large" TextColor="White" />
+                    </Frame>
+                </StackLayout>
+            </Frame>
+            <Frame Style="{DynamicResource LightFrame}" Padding="0">
+                <StackLayout Orientation="Horizontal">
+                    <Frame BackgroundColor="Red">
+                        <Label Text="-" FontAttributes="Bold" FontSize="Large" TextColor="White" />
+                    </Frame>
+                    <Label Text="Beer" HorizontalOptions="FillAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" />
+                    <Frame HorizontalOptions="End" BackgroundColor="Green">
+                        <Label Text="+" FontAttributes="Bold" FontSize="Large" TextColor="White" />
+                    </Frame>
+                </StackLayout>
+            </Frame>
+            <Frame Style="{DynamicResource LightFrame}" Padding="0">
+                <StackLayout Orientation="Horizontal">
+                    <Frame BackgroundColor="Red">
+                        <Label Text="-" FontAttributes="Bold" FontSize="Large" TextColor="White" />
+                    </Frame>
+                    <Label Text="Beer" HorizontalOptions="FillAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" />
+                    <Frame HorizontalOptions="End" BackgroundColor="Green">
+                        <Label Text="+" FontAttributes="Bold" FontSize="Large" TextColor="White" />
+                    </Frame>
+                </StackLayout>
+            </Frame>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
