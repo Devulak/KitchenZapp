@@ -32,7 +32,7 @@ namespace KitchenZapp
         private async void OnMessageReceived(ITagInfo tagInfo)
         {
             int tagID = BitConverter.ToInt32(tagInfo.Identifier, 0);
-            await DisplayAlert("NFC chip found!", tagID.ToString(), "OK");
+            //await DisplayAlert("NFC chip found!", tagID.ToString(), "OK");
 
             ItemsViewModel itemsViewModel = new ItemsViewModel();
 
@@ -40,11 +40,11 @@ namespace KitchenZapp
 
             if (account != null) // Found
             {
-                await Navigation.PushModalAsync(new NavigationPage(new AccountEditPage(new ItemDetailViewModel(account))));
+                await Navigation.PushModalAsync(new NavigationPage(new UpdateAccountBalancePage(new ItemDetailViewModel(account))));
             }
             else // Not found, open register window
             {
-                await Navigation.PushModalAsync(new NavigationPage(new NewItemPage()));
+                await Navigation.PushModalAsync(new NavigationPage(new NewItemPage(tagID)));
             }
         }
     }

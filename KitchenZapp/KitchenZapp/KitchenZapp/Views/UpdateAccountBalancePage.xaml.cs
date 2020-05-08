@@ -11,9 +11,9 @@ using Xamarin.Forms.Xaml;
 namespace KitchenZapp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class AccountEditPage : ContentPage
+    public partial class UpdateAccountBalancePage : ContentPage
     {
-        public AccountEditPage(ItemDetailViewModel viewModel)
+        public UpdateAccountBalancePage(ItemDetailViewModel viewModel)
         {
             InitializeComponent();
 

@@ -6,7 +6,8 @@
              mc:Ignorable="d"
              x:Class="KitchenZapp.Views.AboutPage"
              xmlns:vm="clr-namespace:KitchenZapp.ViewModels"
-             Title="{Binding Title}">
+             Title="{Binding Title}"
+             BackgroundColor="#f4f6fc">
     
     <ContentPage.BindingContext>
         <vm:AboutViewModel />
@@ -20,7 +21,30 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <Grid>
+    <ScrollView>
+        <StackLayout Spacing="20" Padding="15">
+            <Frame Style="{DynamicResource LightFrame}">
+                <StackLayout>
+                    <Label Text="Kontonr.:" />
+                    <Label Text="8011 0001182442" FontSize="Medium" FontAttributes="Bold" />
+                </StackLayout>
+            </Frame>
+            <Frame Style="{DynamicResource LightFrame}">
+                <StackLayout>
+                    <Label Text="IBAN:" />
+                    <Label Text="DK4080110001182442" FontSize="Medium" FontAttributes="Bold" />
+                </StackLayout>
+            </Frame>
+            <Frame Style="{DynamicResource LightFrame}">
+                <StackLayout>
+                    <Label Text="SWIFT:" />
+                    <Label Text="SYBKDK22" FontSize="Medium" FontAttributes="Bold" />
+                </StackLayout>
+            </Frame>
+        </StackLayout>
+    </ScrollView>
+
+    <!--<Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
@@ -76,6 +100,6 @@
                         TextColor="White" />
             </StackLayout>
         </ScrollView>
-    </Grid>
+    </Grid>-->
     
 </ContentPage>

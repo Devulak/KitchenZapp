@@ -116,8 +116,8 @@
                     </Label>
                 </StackLayout>
             </Frame>
-            <Frame Style="{DynamicResource HalfLightFrame}" BackgroundColor="Green">
-                <StackLayout BindableLayout.ItemsSource="{Binding Item.BalanceItems}">
+            <Frame Style="{DynamicResource HalfLightFrame}">
+                <StackLayout BindableLayout.ItemsSource="{Binding Item.BalanceItems}" Spacing="15">
                     <BindableLayout.ItemTemplate>
                         <DataTemplate>
                             <ContentView>

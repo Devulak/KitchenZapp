@@ -15,13 +15,17 @@ namespace KitchenZapp.Views
     {
         public Account Item { get; set; }
 
-        public NewItemPage()
+        public NewItemPage() : this(new Random().Next(0, 2000000000))
+        {
+        }
+
+        public NewItemPage(int tagID)
         {
             InitializeComponent();
 
             Item = new Account
             {
-                PersonalName = "Item name"
+                TagID = tagID
             };
 
             BindingContext = this;

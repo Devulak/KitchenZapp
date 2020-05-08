@@ -12,7 +12,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Views\AccountEditPage.xaml">
+    <Compile Update="Views\UpdateAccountBalancePage.xaml.cs">
+      <DependentUpon>UpdateAccountBalancePage.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Views\UpdateAccountBalancePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
