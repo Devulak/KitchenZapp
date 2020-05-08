@@ -45,20 +45,7 @@
                     </DataTrigger>
                 </Style.Triggers>
             </Style>
-
-            <Style x:Key="OuterFrameStyle" TargetType="Frame">
-                <Setter Property="BackgroundColor" Value="#f4f6fc" />
-                <Setter Property="CornerRadius" Value="5" />
-                <Setter Property="Padding" Value="15" />
-                <Setter Property="HasShadow" Value="False" />
-            </Style>
-
-            <Style x:Key="InnerFrameStyle" TargetType="Frame">
-                <Setter Property="BackgroundColor" Value="white" />
-                <Setter Property="CornerRadius" Value="5" />
-                <Setter Property="Padding" Value="15" />
-                <Setter Property="HasShadow" Value="False" />
-            </Style>
+            
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -68,103 +55,122 @@
 
 
 
-
-    <StackLayout Spacing="20" Padding="20">
-        <Frame Style="{DynamicResource OuterFrameStyle}">
-            <StackLayout Spacing="15">
-                <Label Text="{Binding Item.DoorNumber}"
-                           FontSize="Small"
+    <ScrollView>
+        <StackLayout Spacing="20" Padding="20">
+            <Frame Style="{DynamicResource HalfLightFrame}">
+                <StackLayout Spacing="15">
+                    <Frame Style="{DynamicResource DarkFrame}" HorizontalOptions="Center">
+                        <Label Text="{Binding Item.DoorNumber}"
+                               FontSize="Small"
+                               FontAttributes="Bold"
+                               HorizontalTextAlignment="Center"/>
+                    </Frame>
+                    <Label Text="{Binding Item.PersonalName}"
+                           FontSize="Title"
+                           FontAttributes="Bold"
                            HorizontalTextAlignment="Center"/>
-                <Label Text="{Binding Item.PersonalName}"
-                       FontSize="Title"
-                       FontAttributes="Bold"
-                       HorizontalTextAlignment="Center"/>
-                <Frame Style="{DynamicResource InnerFrameStyle}">
-                    <StackLayout Orientation="Horizontal">
-                        <Label Text="Birthday"
-                           FontSize="Small"/>
-                        <Label Text="{Binding Item.Birthday, StringFormat='{0:dd/MM/yyyy}'}"
-                           FontSize="Small"
-                           HorizontalTextAlignment="End"
-                           HorizontalOptions="FillAndExpand"/>
-                    </StackLayout>
-                </Frame>
-                <Frame Style="{DynamicResource InnerFrameStyle}">
-                    <StackLayout Orientation="Horizontal">
-                        <Label Text="Phone number"
-                           FontSize="Small"/>
-                        <Label Text="{Binding Item.Phone}"
-                           FontSize="Small"
-                           HorizontalTextAlignment="End"
-                           HorizontalOptions="FillAndExpand"/>
-                    </StackLayout>
-                </Frame>
-            </StackLayout>
-        </Frame>
-        <Frame Style="{DynamicResource OuterFrameStyle}">
-            <StackLayout Orientation="Horizontal">
-                <Label Text="Balance" FontSize="Medium" />
-                <Label Text="{Binding Item.Balance, StringFormat='{0:N2} kr'}" d:Text="0.00 kr" FontAttributes="Bold" FontSize="Medium" HorizontalTextAlignment="End" HorizontalOptions="FillAndExpand" TextColor="#278cff">
-                    <Label.Triggers>
-                        <DataTrigger TargetType="Label" Binding="{Binding Item.IsTotalNegative}" Value="true">
-                            <Setter Property="TextColor" Value="Red" />
-                        </DataTrigger>
-                        <DataTrigger TargetType="Label" Binding="{Binding Item.Balance}" Value="0">
-                            <Setter Property="TextColor" Value="Gray" />
-                        </DataTrigger>
-                    </Label.Triggers>
-                </Label>
-            </StackLayout>
-        </Frame>
-        <Frame Style="{DynamicResource OuterFrameStyle}" Padding="7.5">
-            <CollectionView x:Name="ItemsCollectionView"
-                        ItemsSource="{Binding Item.BalanceItems}">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <ContentView Padding="7.5">
-                            <Frame Style="{DynamicResource InnerFrameStyle}">
-                                <StackLayout Orientation="Horizontal" Spacing="0">
-                                    <StackLayout>
+                    <Frame Style="{DynamicResource LightFrame}">
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Birthday"
+                               FontSize="Small"/>
+                            <Label Text="{Binding Item.Birthday, StringFormat='{0:dd/MM/yyyy}'}"
+                               FontSize="Small"
+                               HorizontalTextAlignment="End"
+                               HorizontalOptions="FillAndExpand"/>
+                        </StackLayout>
+                    </Frame>
+                    <Frame Style="{DynamicResource LightFrame}">
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Phone number"
+                               FontSize="Small"/>
+                            <Label Text="{Binding Item.Phone}"
+                               FontSize="Small"
+                               HorizontalTextAlignment="End"
+                               HorizontalOptions="FillAndExpand"/>
+                        </StackLayout>
+                    </Frame>
+                    <Frame Style="{DynamicResource LightFrame}">
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Tag ID"
+                               FontSize="Small"/>
+                            <Label Text="{Binding Item.TagID}"
+                               FontSize="Small"
+                               HorizontalTextAlignment="End"
+                               HorizontalOptions="FillAndExpand"/>
+                        </StackLayout>
+                    </Frame>
+                </StackLayout>
+            </Frame>
+            <Frame Style="{DynamicResource HalfLightFrame}">
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Balance" FontSize="Medium" />
+                    <Label Text="{Binding Item.Balance, StringFormat='{0:N2} kr'}" d:Text="0.00 kr" FontAttributes="Bold" FontSize="Medium" HorizontalTextAlignment="End" HorizontalOptions="FillAndExpand" TextColor="#278cff">
+                        <Label.Triggers>
+                            <DataTrigger TargetType="Label" Binding="{Binding Item.IsBalanceNegative}" Value="True">
+                                <Setter Property="TextColor" Value="Red" />
+                            </DataTrigger>
+                            <DataTrigger TargetType="Label" Binding="{Binding Item.Balance}" Value="0">
+                                <Setter Property="TextColor" Value="Gray" />
+                            </DataTrigger>
+                        </Label.Triggers>
+                    </Label>
+                </StackLayout>
+            </Frame>
+            <Frame Style="{DynamicResource HalfLightFrame}" BackgroundColor="Green">
+                <StackLayout BindableLayout.ItemsSource="{Binding Item.BalanceItems}">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <ContentView>
+                                <Frame Style="{DynamicResource LightFrame}">
+                                    <StackLayout Orientation="Horizontal" Spacing="0">
                                         <Label Text="{Binding Description}"
+                                                   LineBreakMode="NoWrap"
+                                                   FontSize="Medium"
+                                                   VerticalTextAlignment="Center"/>
+                                        <StackLayout Spacing="0" HorizontalOptions="FillAndExpand">
+                                            <StackLayout Spacing="0" Orientation="Horizontal" HorizontalOptions="End">
+                                                <Label Text="{Binding Amount, StringFormat='{0} x'}"
+                                                       LineBreakMode="NoWrap"
+                                                       FontSize="Small"
+                                                       HorizontalTextAlignment="End" />
+                                                <Label Text="{Binding Price, StringFormat=' {0:N2} kr'}"
+                                                       LineBreakMode="NoWrap"
+                                                       FontSize="Small"
+                                                       HorizontalTextAlignment="End" />
+                                            </StackLayout>
+                                            <Label Text="{Binding Total, StringFormat='{0:N2} kr'}"
+                                               LineBreakMode="NoWrap"
                                                FontSize="Small"
-                                               VerticalTextAlignment="Center"
-                                               HorizontalOptions="FillAndExpand"/>
+                                               TextColor="Green"
+                                               HorizontalTextAlignment="End">
+                                                <Label.Triggers>
+                                                    <DataTrigger TargetType="Label"
+                                                         Binding="{Binding IsTotalNegative}"
+                                                         Value="true">
+                                                        <Setter Property="TextColor"
+                                                        Value="Red" />
+                                                    </DataTrigger>
+                                                    <DataTrigger TargetType="Label"
+                                                         Binding="{Binding Balance}"
+                                                         Value="0">
+                                                        <Setter Property="TextColor"
+                                                        Value="Gray" />
+                                                    </DataTrigger>
+                                                </Label.Triggers>
+                                            </Label>
+                                        </StackLayout>
                                     </StackLayout>
-                                    <StackLayout Spacing="0" HorizontalOptions="FillAndExpand">
-                                        <Label Text="{Binding Amount, StringFormat='x{0}'}"
-                                           d:Text="x 1"
-                                           LineBreakMode="NoWrap"
-                                           FontSize="Small"
-                                           HorizontalTextAlignment="End" />
-                                        <Label Text="{Binding Total, StringFormat='{0:N2} kr'}"
-                                           d:Text="2.00 kr"
-                                           LineBreakMode="NoWrap"
-                                           FontSize="Small"
-                                           TextColor="Green"
-                                           HorizontalTextAlignment="End">
-                                            <Label.Triggers>
-                                                <DataTrigger TargetType="Label"
-                                                     Binding="{Binding IsTotalNegative}"
-                                                     Value="true">
-                                                    <Setter Property="TextColor"
-                                                    Value="Red" />
-                                                </DataTrigger>
-                                                <DataTrigger TargetType="Label"
-                                                     Binding="{Binding Balance}"
-                                                     Value="0">
-                                                    <Setter Property="TextColor"
-                                                    Value="Gray" />
-                                                </DataTrigger>
-                                            </Label.Triggers>
-                                        </Label>
-                                    </StackLayout>
-                                </StackLayout>
-                            </Frame>
-                        </ContentView>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-        </Frame>
-    </StackLayout>
-
+                                </Frame>
+                            </ContentView>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>
+                <Frame.Triggers>
+                    <DataTrigger TargetType="Frame" Binding="{Binding Item.BalanceItems.Count}" Value="0">
+                        <Setter Property="IsVisible" Value="False" />
+                    </DataTrigger>
+                </Frame.Triggers>
+            </Frame>
+        </StackLayout>
+    </ScrollView>
 </ContentPage>

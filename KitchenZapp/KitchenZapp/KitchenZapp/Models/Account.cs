@@ -9,7 +9,7 @@ namespace KitchenZapp.Models
         public string Id { get; set; }
         public string PersonalName { get; set; }
         public int DoorNumber { get; set; }
-        public DateTime Birthday { get; set; }
+        public DateTime Birthday { get; set; } = DateTime.UtcNow.Date;
         public string Phone { get; set; }
         public int TagID { get; set; }
 

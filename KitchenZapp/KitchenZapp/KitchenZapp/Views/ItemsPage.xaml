@@ -44,7 +44,7 @@
                         <ContentView Padding="10">
                             <Frame Style="{DynamicResource ValueContainerStyle}" Padding="15">
                                 <StackLayout Orientation="Horizontal" Spacing="15">
-                                    <Frame BackgroundColor="#edf0f4" Padding="5,10" CornerRadius="5">
+                                    <Frame Style="{DynamicResource DarkFrame}">
                                         <Label Text="{Binding DoorNumber}"
                                                FontSize="Default"
                                                TextColor="#8c9099"

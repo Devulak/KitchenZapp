@@ -6,5 +6,33 @@
              mc:Ignorable="d"
              x:Class="KitchenZapp.App">
     <Application.Resources>
+        <ResourceDictionary>
+
+            <Style x:Key="RoundFrame" TargetType="Frame">
+                <Setter Property="CornerRadius" Value="5" />
+                <Setter Property="Padding" Value="15" />
+                <Setter Property="HasShadow" Value="False" />
+            </Style>
+
+            <Style x:Key="HalfLightFrame" TargetType="Frame" BasedOn="{StaticResource RoundFrame}">
+                <Setter Property="BackgroundColor" Value="#f4f6fc" />
+            </Style>
+
+            <Style x:Key="LightFrame" TargetType="Frame" BasedOn="{StaticResource RoundFrame}">
+                <Setter Property="BackgroundColor" Value="white" />
+            </Style>
+
+            <Style x:Key="DarkFrame" TargetType="Frame" BasedOn="{StaticResource RoundFrame}">
+                <Setter Property="BackgroundColor" Value="#edf0f4" />
+                <Setter Property="Padding" Value="10" />
+            </Style>
+
+            <Style TargetType="Button">
+                <Setter Property="BackgroundColor" Value="#278cff" />
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="CornerRadius" Value="5" />
+            </Style>
+            
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

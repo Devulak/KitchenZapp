@@ -5,22 +5,50 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="KitchenZapp.Views.NewItemPage"
-             Title="New Item">
+             Title="Register new account"
+             BackgroundColor="#f4f6fc">
     
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Cancel" Clicked="Cancel_Clicked" />
         <ToolbarItem Text="Save" Clicked="Save_Clicked" />
     </ContentPage.ToolbarItems>
-    
-    <ContentPage.Content>
+
+    <ScrollView>
         <StackLayout Spacing="20" Padding="15">
-            <Label Text="Personal name" FontSize="Medium" />
-            <Entry Text="{Binding Item.PersonalName}" d:Text="Item personal name" FontSize="Small" />
-            <Label Text="Door number" FontSize="Medium" />
-            <Editor Text="{Binding Item.DoorNumber}" d:Text="Item door number" FontSize="Small" Margin="0" />
-            <Label Text="Tag ID" FontSize="Medium" />
-            <Editor Text="{Binding Item.TagID}" d:Text="Tag ID" FontSize="Small" Margin="0" />
+            <Frame Style="{DynamicResource LightFrame}">
+                <StackLayout>
+                    <Label Text="Personal name" />
+                    <Entry Text="{Binding Item.PersonalName}" />
+                </StackLayout>
+            </Frame>
+            <Frame Style="{DynamicResource LightFrame}">
+                <StackLayout>
+                    <Label Text="Door number" />
+                    <Entry Text="{Binding Item.DoorNumber}" Keyboard="Numeric" />
+                </StackLayout>
+            </Frame>
+            <Frame Style="{DynamicResource LightFrame}">
+                <StackLayout>
+                    <Label Text="Birthday" />
+                    <DatePicker Date="{Binding Item.Birthday}" Format="dd/MM/yyyy" />
+                </StackLayout>
+            </Frame>
+            <Frame Style="{DynamicResource LightFrame}">
+                <StackLayout>
+                    <Label Text="Phone number" />
+                    <Entry Text="{Binding Item.DoorNumber}" Keyboard="Telephone" />
+                </StackLayout>
+            </Frame>
+            <Frame Style="{DynamicResource LightFrame}">
+                <StackLayout>
+                    <Label Text="Tag ID" />
+                    <Label Text="{Binding Item.TagID}" FontSize="Medium" />
+                </StackLayout>
+            </Frame>
+            <ContentView VerticalOptions="FillAndExpand">
+                <Button Text="Register" VerticalOptions="End" Clicked="Save_Clicked" />
+            </ContentView>
         </StackLayout>
-    </ContentPage.Content>
-    
+    </ScrollView>
+
 </ContentPage>
