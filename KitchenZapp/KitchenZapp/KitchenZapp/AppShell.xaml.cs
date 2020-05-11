@@ -43,7 +43,7 @@ namespace KitchenZapp
 
             if (account != null) // Found
             {
-                await Navigation.PushModalAsync(new NavigationPage(new UpdateAccountBalancePage(new ItemDetailViewModel(account))));
+                await Navigation.PushModalAsync(new NavigationPage(new UpdateAccountBalancePage(new UpdateAccountBalanceViewModel(account))));
             }
             else // Not found, open register window
             {

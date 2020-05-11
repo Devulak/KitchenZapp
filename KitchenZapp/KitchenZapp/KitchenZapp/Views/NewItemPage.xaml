@@ -45,9 +45,7 @@
                     <Label Text="{Binding Item.TagID}" FontSize="Medium" />
                 </StackLayout>
             </Frame>
-            <ContentView VerticalOptions="FillAndExpand">
-                <Button Text="Register" VerticalOptions="End" Clicked="Save_Clicked" />
-            </ContentView>
+            <Button Text="Register" VerticalOptions="EndAndExpand" Clicked="Save_Clicked" />
         </StackLayout>
     </ScrollView>
 

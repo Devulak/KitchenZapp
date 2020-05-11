@@ -1,4 +1,5 @@
-﻿using KitchenZapp.ViewModels;
+﻿using KitchenZapp.Models;
+using KitchenZapp.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace KitchenZapp.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class UpdateAccountBalancePage : ContentPage
     {
-        public UpdateAccountBalancePage(ItemDetailViewModel viewModel)
+        public UpdateAccountBalancePage(UpdateAccountBalanceViewModel viewModel)
         {
             InitializeComponent();
 

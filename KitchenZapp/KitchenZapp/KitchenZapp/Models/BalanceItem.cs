@@ -8,6 +8,7 @@ namespace KitchenZapp.Models
         public string Description { get; set; }
         public double Price { get; set; }
         public int Amount { get; set; } = 1;
+        public DateTime DateTime { get; set; }
 
         public double Total => -Price * Amount;
 

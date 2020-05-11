@@ -11,12 +11,12 @@
             <Frame Style="{DynamicResource LightFrame}">
                 <StackLayout Orientation="Horizontal">
                     <Label Text="Balance" FontSize="Medium" />
-                    <Label Text="{Binding Item.Balance, StringFormat='{0:N2} kr'}" d:Text="0.00 kr" FontAttributes="Bold" FontSize="Medium" HorizontalTextAlignment="End" HorizontalOptions="FillAndExpand" TextColor="#278cff">
+                    <Label Text="{Binding Account.Balance, StringFormat='{0:N2} kr'}" d:Text="0.00 kr" FontAttributes="Bold" FontSize="Medium" HorizontalTextAlignment="End" HorizontalOptions="FillAndExpand" TextColor="#278cff">
                         <Label.Triggers>
-                            <DataTrigger TargetType="Label" Binding="{Binding Item.IsBalanceNegative}" Value="True">
+                            <DataTrigger TargetType="Label" Binding="{Binding Account.IsBalanceNegative}" Value="True">
                                 <Setter Property="TextColor" Value="Red" />
                             </DataTrigger>
-                            <DataTrigger TargetType="Label" Binding="{Binding Item.Balance}" Value="0">
+                            <DataTrigger TargetType="Label" Binding="{Binding Account.Balance}" Value="0">
                                 <Setter Property="TextColor" Value="Gray" />
                             </DataTrigger>
                         </Label.Triggers>
@@ -29,9 +29,12 @@
                         <Label Text="-" FontAttributes="Bold" FontSize="Large" TextColor="White" />
                     </Frame>
                     <Label Text="Beer" HorizontalOptions="FillAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" />
-                    <Frame HorizontalOptions="End" BackgroundColor="Green">
-                        <Label Text="+" FontAttributes="Bold" FontSize="Large" TextColor="White" />
-                    </Frame>
+                    <Button Text="+"
+                            FontAttributes="Bold"
+                            FontSize="Large"
+                            TextColor="White"
+                            Command="{Binding AddToItem}"
+                            CommandParameter="{Binding BalanceItemBeer}"/>
                 </StackLayout>
             </Frame>
             <Frame Style="{DynamicResource LightFrame}" Padding="0">
@@ -56,6 +59,22 @@
                     </Frame>
                 </StackLayout>
             </Frame>
+            <Frame Style="{DynamicResource LightFrame}" VerticalOptions="EndAndExpand">
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Balance" FontSize="Medium" />
+                    <Label Text="{Binding BalanceAfterCalculation, StringFormat='{0:N2} kr'}" d:Text="0.00 kr" FontAttributes="Bold" FontSize="Medium" HorizontalTextAlignment="End" HorizontalOptions="FillAndExpand" TextColor="#278cff">
+                        <Label.Triggers>
+                            <DataTrigger TargetType="Label" Binding="{Binding IsBalanceAfterCalculationNegative}" Value="True">
+                                <Setter Property="TextColor" Value="Red" />
+                            </DataTrigger>
+                            <DataTrigger TargetType="Label" Binding="{Binding BalanceAfterCalculation}" Value="0">
+                                <Setter Property="TextColor" Value="Gray" />
+                            </DataTrigger>
+                        </Label.Triggers>
+                    </Label>
+                </StackLayout>
+            </Frame>
+            <Button Text="Add" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
