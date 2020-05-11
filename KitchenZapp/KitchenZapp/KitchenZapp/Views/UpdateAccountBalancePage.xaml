@@ -5,7 +5,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="KitchenZapp.Views.UpdateAccountBalancePage"
-             BackgroundColor="#f4f6fc">
+             BackgroundColor="#f4f6fc"
+             x:Name="root">
     <ContentPage.Content>
         <StackLayout Spacing="20" Padding="20">
             <Frame Style="{DynamicResource LightFrame}">
@@ -23,42 +24,37 @@
                     </Label>
                 </StackLayout>
             </Frame>
-            <Frame Style="{DynamicResource LightFrame}" Padding="0">
-                <StackLayout Orientation="Horizontal">
-                    <Frame BackgroundColor="Red">
-                        <Label Text="-" FontAttributes="Bold" FontSize="Large" TextColor="White" />
-                    </Frame>
-                    <Label Text="Beer" HorizontalOptions="FillAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" />
-                    <Button Text="+"
-                            FontAttributes="Bold"
-                            FontSize="Large"
-                            TextColor="White"
-                            Command="{Binding AddToItem}"
-                            CommandParameter="{Binding BalanceItemBeer}"/>
-                </StackLayout>
-            </Frame>
-            <Frame Style="{DynamicResource LightFrame}" Padding="0">
-                <StackLayout Orientation="Horizontal">
-                    <Frame BackgroundColor="Red">
-                        <Label Text="-" FontAttributes="Bold" FontSize="Large" TextColor="White" />
-                    </Frame>
-                    <Label Text="Beer" HorizontalOptions="FillAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" />
-                    <Frame HorizontalOptions="End" BackgroundColor="Green">
-                        <Label Text="+" FontAttributes="Bold" FontSize="Large" TextColor="White" />
-                    </Frame>
-                </StackLayout>
-            </Frame>
-            <Frame Style="{DynamicResource LightFrame}" Padding="0">
-                <StackLayout Orientation="Horizontal">
-                    <Frame BackgroundColor="Red">
-                        <Label Text="-" FontAttributes="Bold" FontSize="Large" TextColor="White" />
-                    </Frame>
-                    <Label Text="Beer" HorizontalOptions="FillAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" />
-                    <Frame HorizontalOptions="End" BackgroundColor="Green">
-                        <Label Text="+" FontAttributes="Bold" FontSize="Large" TextColor="White" />
-                    </Frame>
-                </StackLayout>
-            </Frame>
+
+            <StackLayout BindableLayout.ItemsSource="{Binding Items}" Spacing="15">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate>
+                        <ContentView>
+                            <Frame Style="{DynamicResource LightFrame}" Padding="0">
+                                <StackLayout Orientation="Horizontal">
+                                    <Button Text="-"
+                                            BackgroundColor="Red"
+                                            FontAttributes="Bold"
+                                            FontSize="Large"
+                                            TextColor="White"
+                                            Command="{Binding Source={x:Reference root}, Path=BindingContext.SubtractFromItem}"
+                                            CommandParameter="{Binding}"
+                                            IsEnabled="{Binding Amount}" />
+                                    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="Center">
+                                        <Label Text="{Binding Description}" HorizontalTextAlignment="Center" />
+                                        <Label Text="{Binding Amount}" HorizontalTextAlignment="Center" />
+                                    </StackLayout>
+                                    <Button Text="+"
+                                            FontAttributes="Bold"
+                                            FontSize="Large"
+                                            TextColor="White"
+                                            Command="{Binding Source={x:Reference root}, Path=BindingContext.AddToItem}"
+                                            CommandParameter="{Binding}"/>
+                                </StackLayout>
+                            </Frame>
+                        </ContentView>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </StackLayout>
             <Frame Style="{DynamicResource LightFrame}" VerticalOptions="EndAndExpand">
                 <StackLayout Orientation="Horizontal">
                     <Label Text="Balance" FontSize="Medium" />

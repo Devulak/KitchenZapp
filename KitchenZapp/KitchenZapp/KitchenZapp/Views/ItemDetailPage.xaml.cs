@@ -21,18 +21,5 @@ namespace KitchenZapp.Views
 
             BindingContext = this.viewModel = viewModel;
         }
-
-        public ItemDetailPage()
-        {
-            InitializeComponent();
-
-            var item = new Account
-            {
-                PersonalName = "Item 1"
-            };
-
-            viewModel = new ItemDetailViewModel(item);
-            BindingContext = viewModel;
-        }
     }
 }
