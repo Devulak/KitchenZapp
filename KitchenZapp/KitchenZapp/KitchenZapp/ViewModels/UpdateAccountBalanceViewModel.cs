@@ -13,8 +13,8 @@ namespace KitchenZapp.ViewModels
     public class UpdateAccountBalanceViewModel : BaseViewModel
     {
         public Account Account { get; }
-        public ObservableCollection<BalanceItem> Items { get; }
-        public double BalanceAfterCalculation => Account.Balance + Items.Sum(o => o.Total);
+        public ObservableCollection<BalanceItemViewModel> Items { get; }
+        public double BalanceAfterCalculation => Account.Balance + Items.Sum(o => o.BalanceItem.Total);
         public bool IsBalanceAfterCalculationNegative => BalanceAfterCalculation < 0;
 
         public ICommand AddToItem { get; }
@@ -25,60 +25,58 @@ namespace KitchenZapp.ViewModels
         {
             Account = account;
 
-            Items = new ObservableCollection<BalanceItem>
+            Items = new ObservableCollection<BalanceItemViewModel>
             {
-                new BalanceItem
+                new BalanceItemViewModel(new BalanceItem
                 {
                     Description = "Beer can (330 ml)",
                     Price = 5,
                     Amount = 0
-                },
-                new BalanceItem
+                }),
+                new BalanceItemViewModel(new BalanceItem
                 {
                     Description = "Soda can (330 ml)",
                     Price = 6,
                     Amount = 0
-                },
-                new BalanceItem
+                }),
+                new BalanceItemViewModel(new BalanceItem
                 {
                     Description = "Soda bottle (1.5 L)",
                     Price = 15,
                     Amount = 0
-                }
+                })
             };
 
-            AddToItem = new Command<BalanceItem>(o => OnAdd(o));
-            SubtractFromItem = new Command<BalanceItem>(o => OnSubtract(o));
+            AddToItem = new Command<BalanceItemViewModel>(o => OnAdd(o));
+            SubtractFromItem = new Command<BalanceItemViewModel>(o => OnSubtract(o));
             Save = new Command(o => OnSave());
         }
 
-        void OnAdd(BalanceItem item)
+        void OnAdd(BalanceItemViewModel item)
         {
             item.Amount++;
-            OnPropertyChanged("Items");
             OnPropertyChanged("BalanceAfterCalculation");
             OnPropertyChanged("IsBalanceAfterCalculationNegative");
         }
 
-        void OnSubtract(BalanceItem item)
+        void OnSubtract(BalanceItemViewModel item)
         {
             if (item.Amount > 0)
             {
                 item.Amount--;
-                OnPropertyChanged("Items");
                 OnPropertyChanged("BalanceAfterCalculation");
                 OnPropertyChanged("IsBalanceAfterCalculationNegative");
             }
         }
 
-        void OnSave()
+        public void OnSave()
         {
-            foreach (BalanceItem balanceItem in Items)
+            foreach (BalanceItemViewModel balanceItemViewModel in Items)
             {
-                if (balanceItem.Amount <= 0)
+                if (balanceItemViewModel.BalanceItem.Amount > 0)
                 {
-                    balanceItem.DateTime = DateTime.UtcNow.Date;
-                    Account.BalanceItems.Add(balanceItem);
+                    balanceItemViewModel.BalanceItem.DateTime = DateTime.UtcNow.Date;
+                    Account.BalanceItems.Add(balanceItemViewModel.BalanceItem);
                 }
             }
         }

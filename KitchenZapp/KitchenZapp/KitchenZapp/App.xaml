@@ -32,6 +32,10 @@
                 <Setter Property="TextColor" Value="White" />
                 <Setter Property="CornerRadius" Value="5" />
             </Style>
+
+            <Style TargetType="StackLayout">
+                <Setter Property="Spacing" Value="0" />
+            </Style>
             
         </ResourceDictionary>
     </Application.Resources>

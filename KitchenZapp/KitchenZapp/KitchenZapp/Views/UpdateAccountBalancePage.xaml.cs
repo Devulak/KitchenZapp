@@ -14,11 +14,20 @@ namespace KitchenZapp.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class UpdateAccountBalancePage : ContentPage
     {
+        private UpdateAccountBalanceViewModel ViewModel;
+
         public UpdateAccountBalancePage(UpdateAccountBalanceViewModel viewModel)
         {
             InitializeComponent();
 
-            BindingContext = viewModel;
+            BindingContext = ViewModel = viewModel;
+        }
+
+        private void OnSave_Clicked(object sender, EventArgs e)
+        {
+            ViewModel.OnSave();
+
+            Navigation.PopModalAsync();
         }
     }
 }
