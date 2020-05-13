@@ -14,7 +14,8 @@ namespace KitchenZapp.ViewModels
     {
         public Account Account { get; }
         public ObservableCollection<BalanceItemViewModel> Items { get; }
-        public double BalanceAfterCalculation => Account.Balance + Items.Sum(o => o.BalanceItem.Total);
+        public double Sum => Items.Sum(o => o.BalanceItem.Total);
+        public double BalanceAfterCalculation => Account.Balance + Sum;
         public bool IsBalanceAfterCalculationNegative => BalanceAfterCalculation < 0;
 
         public ICommand AddToItem { get; }
@@ -29,18 +30,24 @@ namespace KitchenZapp.ViewModels
             {
                 new BalanceItemViewModel(new BalanceItem
                 {
+                    Title = "Beer can",
+                    SubTitle = "330 ml",
                     Description = "Beer can (330 ml)",
                     Price = 5,
                     Amount = 0
                 }),
                 new BalanceItemViewModel(new BalanceItem
                 {
+                    Title = "Soda can",
+                    SubTitle = "330 ml",
                     Description = "Soda can (330 ml)",
                     Price = 6,
                     Amount = 0
                 }),
                 new BalanceItemViewModel(new BalanceItem
                 {
+                    Title = "Soda bottle",
+                    SubTitle = "1.5 L",
                     Description = "Soda bottle (1.5 L)",
                     Price = 15,
                     Amount = 0
@@ -55,6 +62,7 @@ namespace KitchenZapp.ViewModels
         void OnAdd(BalanceItemViewModel item)
         {
             item.Amount++;
+            OnPropertyChanged("Sum");
             OnPropertyChanged("BalanceAfterCalculation");
             OnPropertyChanged("IsBalanceAfterCalculationNegative");
         }
@@ -64,6 +72,7 @@ namespace KitchenZapp.ViewModels
             if (item.Amount > 0)
             {
                 item.Amount--;
+                OnPropertyChanged("Sum");
                 OnPropertyChanged("BalanceAfterCalculation");
                 OnPropertyChanged("IsBalanceAfterCalculationNegative");
             }

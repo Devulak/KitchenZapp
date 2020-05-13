@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:controls="clr-namespace:KitchenZapp.Views.Controls"
              mc:Ignorable="d"
              x:Class="KitchenZapp.Views.ItemDetailPage"
              Title="{Binding Title}"
@@ -120,48 +121,7 @@
                 <StackLayout BindableLayout.ItemsSource="{Binding Item.BalanceItems}" Spacing="15">
                     <BindableLayout.ItemTemplate>
                         <DataTemplate>
-                            <ContentView>
-                                <Frame Style="{DynamicResource LightFrame}">
-                                    <StackLayout Orientation="Horizontal" Spacing="0">
-                                        <Label Text="{Binding Description}"
-                                                   LineBreakMode="NoWrap"
-                                                   FontSize="Medium"
-                                                   VerticalTextAlignment="Center"/>
-                                        <StackLayout Spacing="0" HorizontalOptions="FillAndExpand">
-                                            <StackLayout Spacing="0" Orientation="Horizontal" HorizontalOptions="End">
-                                                <Label Text="{Binding Amount, StringFormat='{0} x'}"
-                                                       LineBreakMode="NoWrap"
-                                                       FontSize="Small"
-                                                       HorizontalTextAlignment="End" />
-                                                <Label Text="{Binding Price, StringFormat=' {0:N2} kr'}"
-                                                       LineBreakMode="NoWrap"
-                                                       FontSize="Small"
-                                                       HorizontalTextAlignment="End" />
-                                            </StackLayout>
-                                            <Label Text="{Binding Total, StringFormat='{0:N2} kr'}"
-                                               LineBreakMode="NoWrap"
-                                               FontSize="Small"
-                                               TextColor="Green"
-                                               HorizontalTextAlignment="End">
-                                                <Label.Triggers>
-                                                    <DataTrigger TargetType="Label"
-                                                         Binding="{Binding IsTotalNegative}"
-                                                         Value="true">
-                                                        <Setter Property="TextColor"
-                                                        Value="Red" />
-                                                    </DataTrigger>
-                                                    <DataTrigger TargetType="Label"
-                                                         Binding="{Binding Balance}"
-                                                         Value="0">
-                                                        <Setter Property="TextColor"
-                                                        Value="Gray" />
-                                                    </DataTrigger>
-                                                </Label.Triggers>
-                                            </Label>
-                                        </StackLayout>
-                                    </StackLayout>
-                                </Frame>
-                            </ContentView>
+                            <controls:BalanceItemView BalanceItemReal="{Binding}" HorizontalOptions="FillAndExpand" />
                         </DataTemplate>
                     </BindableLayout.ItemTemplate>
                 </StackLayout>

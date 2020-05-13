@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Name="this"
+             x:Class="KitchenZapp.Views.Controls.BalanceItemView">
+    <!--x:DataType="local:BalanceItemViewModel"-->
+    <ContentView.Content>
+        <Frame Style="{DynamicResource LightFrame}" BindingContext="{x:Reference this}">
+            <StackLayout Orientation="Horizontal" Spacing="0">
+                <StackLayout>
+                    <Label Text="{Binding BalanceItem.BalanceItem.Title}"
+                           FontSize="Medium"
+                           FontAttributes="Bold"
+                           VerticalTextAlignment="Center"/>
+                    <Label Text="{Binding BalanceItem.BalanceItem.SubTitle}"
+                        LineBreakMode="NoWrap"
+                        FontSize="Small"
+                        VerticalTextAlignment="Center"/>
+                </StackLayout>
+                <StackLayout Spacing="0" HorizontalOptions="FillAndExpand">
+                    <StackLayout Spacing="0" Orientation="Horizontal" HorizontalOptions="End">
+                        <Label Text="{Binding BalanceItem.Amount, StringFormat='{0} x'}"
+                                LineBreakMode="NoWrap"
+                                FontSize="Small"
+                                HorizontalTextAlignment="End" />
+                        <Label Text="{Binding BalanceItem.BalanceItem.Price, StringFormat=' {0:N2} kr'}"
+                                LineBreakMode="NoWrap"
+                                FontSize="Small"
+                                HorizontalTextAlignment="End" />
+                    </StackLayout>
+                    <Label Text="{Binding BalanceItem.Sum, StringFormat='{0:N2} kr'}"
+                            LineBreakMode="NoWrap"
+                            FontSize="Small"
+                            TextColor="Gray"
+                            HorizontalTextAlignment="End">
+                        <Label.Triggers>
+                            <DataTrigger TargetType="Label" Binding="{Binding BalanceItem.HasAmount}" Value="true">
+                                <Setter Property="TextColor" Value="Red" />
+                            </DataTrigger>
+                        </Label.Triggers>
+                    </Label>
+                </StackLayout>
+            </StackLayout>
+        </Frame>
+    </ContentView.Content>
+</ContentView>

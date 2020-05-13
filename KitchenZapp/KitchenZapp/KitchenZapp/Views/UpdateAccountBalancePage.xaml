@@ -3,10 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d"
+             xmlns:controls="clr-namespace:KitchenZapp.Views.Controls"
              x:Class="KitchenZapp.Views.UpdateAccountBalancePage"
+             mc:Ignorable="d"
              BackgroundColor="#f4f6fc"
-             x:Name="root"
+             x:Name="this"
              xmlns:local="clr-namespace:KitchenZapp.ViewModels">
     <ContentPage.Content>
         <StackLayout Spacing="20" Padding="20">
@@ -32,13 +33,14 @@
                         <ContentView>
                             <StackLayout Orientation="Horizontal" Spacing="10">
                                 <Button Text="-"
-                                            BackgroundColor="Red"
-                                            FontAttributes="Bold"
-                                            FontSize="Large"
-                                            TextColor="White"
-                                            Command="{Binding Source={x:Reference root}, Path=BindingContext.SubtractFromItem}"
-                                            CommandParameter="{Binding}"
-                                            WidthRequest="50">
+                                        BackgroundColor="Red"
+                                        FontAttributes="Bold"
+                                        FontSize="Large"
+                                        TextColor="White"
+                                        Command="{Binding Source={x:Reference this}, Path=BindingContext.SubtractFromItem}"
+                                        CommandParameter="{Binding}"
+                                        WidthRequest="50"
+                                        HeightRequest="50">
                                     <Button.Triggers>
                                         <DataTrigger TargetType="Button" Binding="{Binding HasAmount}" Value="False">
                                             <Setter Property="Opacity" Value=".1" />
@@ -47,22 +49,13 @@
                                     </Button.Triggers>
                                 </Button>
                                 <Button Text="+"
-                                            FontAttributes="Bold"
-                                            FontSize="Large"
-                                            TextColor="White"
-                                            Command="{Binding Source={x:Reference root}, Path=BindingContext.AddToItem}"
-                                            CommandParameter="{Binding}"
-                                            WidthRequest="50" />
-                                <Frame Style="{DynamicResource LightFrame}" Padding="0" HorizontalOptions="FillAndExpand">
-                                    <StackLayout VerticalOptions="Center">
-                                        <Label Text="{Binding BalanceItem.Description}" HorizontalTextAlignment="Center" FontAttributes="Bold" />
-                                        <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                                            <Label Text="{Binding Amount, StringFormat='{0} x'}" />
-                                            <Label Text="{Binding BalanceItem.Price, StringFormat=' {0:N2} kr'}" />
-                                            <Label Text="{Binding Sum, StringFormat=' = {0:N2} kr'}" />
-                                        </StackLayout>
-                                    </StackLayout>
-                                </Frame>
+                                        FontAttributes="Bold"
+                                        FontSize="Large"
+                                        TextColor="White"
+                                        Command="{Binding Source={x:Reference this}, Path=BindingContext.AddToItem}"
+                                        CommandParameter="{Binding}"
+                                        WidthRequest="50" />
+                                <controls:BalanceItemView BalanceItem="{Binding}" HorizontalOptions="FillAndExpand" />
                             </StackLayout>
                         </ContentView>
                     </DataTemplate>
@@ -83,7 +76,13 @@
                     </Label>
                 </StackLayout>
             </Frame>
-            <Button Text="Add" Clicked="OnSave_Clicked" />
+            <Button Text="Add" Clicked="OnSave_Clicked">
+                <Button.Triggers>
+                    <DataTrigger TargetType="Button" Binding="{Binding Sum}" Value="0">
+                        <Setter Property="Text" Value="Cancel" />
+                    </DataTrigger>
+                </Button.Triggers>
+            </Button>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

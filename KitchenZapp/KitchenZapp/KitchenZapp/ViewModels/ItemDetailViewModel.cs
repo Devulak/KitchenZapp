@@ -7,6 +7,7 @@ namespace KitchenZapp.ViewModels
     public class ItemDetailViewModel : BaseViewModel
     {
         public Account Item { get; set; }
+
         public ItemDetailViewModel(Account item = null)
         {
             Title = item?.PersonalName;
