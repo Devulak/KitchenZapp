@@ -1,19 +1,73 @@
 ﻿using System;
+using System.ComponentModel;
 
 namespace KitchenZapp.Models
 {
-    public class BalanceItem
+    public class BalanceItem : ModelBase
     {
         public string Id { get; set; }
-        public string Title { get; set; }
-        public string SubTitle { get; set; }
-        public string Description { get; set; }
-        public double Price { get; set; }
-        public int Amount { get; set; } = 1;
-        public DateTime DateTime { get; set; }
 
-        public double Total => -Price * Amount;
+        private string title;
+        public string Title
+        {
+            get { return title; }
+            set
+            {
+                title = value;
+                OnPropertyChanged();
+            }
+        }
 
-        public bool IsTotalNegative => Total < 0;
+        private string subTitle;
+        public string SubTitle
+        {
+            get { return subTitle; }
+            set
+            {
+                subTitle = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private double price;
+        public double Price
+        {
+            get { return price; }
+            set
+            {
+                price = value;
+                OnPropertyChanged();
+                OnPropertyChanged("Sum");
+                OnPropertyChanged("IsTotalNegative");
+            }
+        }
+
+        private int amount;
+        public int Amount
+        {
+            get { return amount; }
+            set
+            {
+                amount = value;
+                OnPropertyChanged();
+                OnPropertyChanged("Sum");
+                OnPropertyChanged("IsTotalNegative");
+            }
+        }
+
+        private DateTime dateTime;
+        public DateTime DateTime
+        {
+            get { return dateTime; }
+            set
+            {
+                dateTime = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public double Sum => Price * Amount;
+
+        public bool IsTotalNegative => Sum < 0;
     }
 }

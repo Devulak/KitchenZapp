@@ -55,7 +55,7 @@
                                         Command="{Binding Source={x:Reference this}, Path=BindingContext.AddToItem}"
                                         CommandParameter="{Binding}"
                                         WidthRequest="50" />
-                                <controls:BalanceItemView BalanceItem="{Binding}" HorizontalOptions="FillAndExpand" />
+                                <controls:BalanceItemView BalanceItem="{Binding BalanceItem}" HorizontalOptions="FillAndExpand" />
                             </StackLayout>
                         </ContentView>
                     </DataTemplate>

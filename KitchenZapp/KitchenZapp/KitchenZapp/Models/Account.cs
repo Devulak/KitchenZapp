@@ -1,22 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Linq;
 
 namespace KitchenZapp.Models
 {
-    public class Account
+    public class Account : ModelBase
     {
         public string Id { get; set; }
         public string PersonalName { get; set; }
         public int DoorNumber { get; set; }
-        public DateTime Birthday { get; set; } = DateTime.UtcNow.Date;
+        public DateTime Birthday { get; set; }
         public string Phone { get; set; }
         public int TagID { get; set; }
 
-        public List<BalanceItem> BalanceItems { get; set; } = new List<BalanceItem>();
+        public ObservableCollection<BalanceItem> BalanceItems { get; set; } = new ObservableCollection<BalanceItem>();
 
-        public double Balance => BalanceItems.Sum(o => o.Total);
+        public double Balance => BalanceItems.Sum(o => -o.Sum);
 
         public bool IsBalanceNegative => Balance < 0;
+
+        public Account()
+        {
+            BalanceItems.CollectionChanged += BalanceItems_CollectionChanged;
+        }
+
+        private void BalanceItems_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            OnPropertyChanged("Balance");
+            OnPropertyChanged("IsBalanceNegative");
+        }
     }
 }

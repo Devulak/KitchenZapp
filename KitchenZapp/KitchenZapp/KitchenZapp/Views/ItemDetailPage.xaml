@@ -121,7 +121,7 @@
                 <StackLayout BindableLayout.ItemsSource="{Binding Item.BalanceItems}" Spacing="15">
                     <BindableLayout.ItemTemplate>
                         <DataTemplate>
-                            <controls:BalanceItemView BalanceItemReal="{Binding}" HorizontalOptions="FillAndExpand" />
+                            <controls:BalanceItemView BalanceItem="{Binding}" HorizontalOptions="FillAndExpand" />
                         </DataTemplate>
                     </BindableLayout.ItemTemplate>
                 </StackLayout>

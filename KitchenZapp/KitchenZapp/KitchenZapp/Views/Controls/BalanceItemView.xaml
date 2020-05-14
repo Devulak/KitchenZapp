@@ -9,36 +9,36 @@
     <!--x:DataType="local:BalanceItemViewModel"-->
     <ContentView.Content>
         <Frame Style="{DynamicResource LightFrame}" BindingContext="{x:Reference this}">
-            <StackLayout Orientation="Horizontal" Spacing="0">
+            <StackLayout Orientation="Horizontal" Spacing="0" BindingContext="{Binding BalanceItem}">
                 <StackLayout>
-                    <Label Text="{Binding BalanceItem.BalanceItem.Title}"
+                    <Label Text="{Binding Title}"
                            FontSize="Medium"
                            FontAttributes="Bold"
                            VerticalTextAlignment="Center"/>
-                    <Label Text="{Binding BalanceItem.BalanceItem.SubTitle}"
+                    <Label Text="{Binding SubTitle}"
                         LineBreakMode="NoWrap"
                         FontSize="Small"
                         VerticalTextAlignment="Center"/>
                 </StackLayout>
-                <StackLayout Spacing="0" HorizontalOptions="FillAndExpand">
+                <StackLayout Spacing="0" HorizontalOptions="FillAndExpand" VerticalOptions="Center">
                     <StackLayout Spacing="0" Orientation="Horizontal" HorizontalOptions="End">
-                        <Label Text="{Binding BalanceItem.Amount, StringFormat='{0} x'}"
+                        <Label Text="{Binding Amount, StringFormat='{0} x'}"
                                 LineBreakMode="NoWrap"
                                 FontSize="Small"
                                 HorizontalTextAlignment="End" />
-                        <Label Text="{Binding BalanceItem.BalanceItem.Price, StringFormat=' {0:N2} kr'}"
+                        <Label Text="{Binding Price, StringFormat=' {0:N2} kr'}"
                                 LineBreakMode="NoWrap"
                                 FontSize="Small"
                                 HorizontalTextAlignment="End" />
                     </StackLayout>
-                    <Label Text="{Binding BalanceItem.Sum, StringFormat='{0:N2} kr'}"
+                    <Label Text="{Binding Sum, StringFormat='{0:N2} kr'}"
                             LineBreakMode="NoWrap"
                             FontSize="Small"
-                            TextColor="Gray"
+                            TextColor="Red"
                             HorizontalTextAlignment="End">
                         <Label.Triggers>
-                            <DataTrigger TargetType="Label" Binding="{Binding BalanceItem.HasAmount}" Value="true">
-                                <Setter Property="TextColor" Value="Red" />
+                            <DataTrigger TargetType="Label" Binding="{Binding Amount}" Value="0">
+                                <Setter Property="TextColor" Value="Gray" />
                             </DataTrigger>
                         </Label.Triggers>
                     </Label>

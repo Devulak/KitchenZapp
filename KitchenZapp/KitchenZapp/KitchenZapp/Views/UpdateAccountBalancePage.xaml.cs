@@ -14,7 +14,7 @@ namespace KitchenZapp.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class UpdateAccountBalancePage : ContentPage
     {
-        private UpdateAccountBalanceViewModel ViewModel;
+        private readonly UpdateAccountBalanceViewModel ViewModel;
 
         public UpdateAccountBalancePage(UpdateAccountBalanceViewModel viewModel)
         {

@@ -14,22 +14,12 @@ namespace KitchenZapp.Views.Controls
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class BalanceItemView : ContentView
     {
-        public static readonly BindableProperty BalanceItemProperty = BindableProperty.Create(nameof(BalanceItem), typeof(BalanceItemViewModel), typeof(BalanceItemView), null);
-        public static readonly BindableProperty BalanceItemRealProperty = BindableProperty.Create(nameof(BalanceItemReal), typeof(BalanceItem), typeof(BalanceItemView), null);
+        public static readonly BindableProperty BalanceItemProperty = BindableProperty.Create(nameof(BalanceItem), typeof(BalanceItem), typeof(BalanceItemView), null);
 
-        public BalanceItemViewModel BalanceItem
+        public BalanceItem BalanceItem
         {
-            get => (BalanceItemViewModel)GetValue(BalanceItemProperty);
+            get => (BalanceItem)GetValue(BalanceItemProperty);
             set => SetValue(BalanceItemProperty, value);
-        }
-        public BalanceItem BalanceItemReal
-        {
-            get => (BalanceItem)GetValue(BalanceItemRealProperty);
-            set
-            {
-                SetValue(BalanceItemRealProperty, value);
-                SetValue(BalanceItemProperty, new BalanceItemViewModel(value));
-            }
         }
 
         public BalanceItemView()

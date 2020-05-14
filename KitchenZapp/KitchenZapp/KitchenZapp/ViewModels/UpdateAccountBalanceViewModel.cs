@@ -14,8 +14,8 @@ namespace KitchenZapp.ViewModels
     {
         public Account Account { get; }
         public ObservableCollection<BalanceItemViewModel> Items { get; }
-        public double Sum => Items.Sum(o => o.BalanceItem.Total);
-        public double BalanceAfterCalculation => Account.Balance + Sum;
+        public double Sum => Items.Sum(o => o.BalanceItem.Sum);
+        public double BalanceAfterCalculation => Account.Balance - Sum;
         public bool IsBalanceAfterCalculationNegative => BalanceAfterCalculation < 0;
 
         public ICommand AddToItem { get; }
@@ -32,7 +32,6 @@ namespace KitchenZapp.ViewModels
                 {
                     Title = "Beer can",
                     SubTitle = "330 ml",
-                    Description = "Beer can (330 ml)",
                     Price = 5,
                     Amount = 0
                 }),
@@ -40,7 +39,6 @@ namespace KitchenZapp.ViewModels
                 {
                     Title = "Soda can",
                     SubTitle = "330 ml",
-                    Description = "Soda can (330 ml)",
                     Price = 6,
                     Amount = 0
                 }),
@@ -48,7 +46,6 @@ namespace KitchenZapp.ViewModels
                 {
                     Title = "Soda bottle",
                     SubTitle = "1.5 L",
-                    Description = "Soda bottle (1.5 L)",
                     Price = 15,
                     Amount = 0
                 })

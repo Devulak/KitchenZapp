@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using KitchenZapp.Models;
@@ -14,17 +15,8 @@ namespace KitchenZapp.Services
         {
             items = new List<Account>()
             {
-                new Account { Id = Guid.NewGuid().ToString(), PersonalName = "First Dummy", DoorNumber=1337, Birthday = DateTime.UtcNow, Phone = "0045 6969 6969", TagID = 13371337, BalanceItems = new List<BalanceItem>{
-                    new BalanceItem { Id = Guid.NewGuid().ToString(), Description = "Beer", Price = 6 },
-                    new BalanceItem { Id = Guid.NewGuid().ToString(), Description = "Soda", Price = 5, Amount = 2 },
-                    new BalanceItem { Id = Guid.NewGuid().ToString(), Description = "Big soda", Price = 15.2 }
-                } },
-                new Account { Id = Guid.NewGuid().ToString(), PersonalName = "Second Dummy", DoorNumber=1337, Birthday = DateTime.UtcNow, Phone = "0045 6969 6969", TagID = 13371337, BalanceItems = new List<BalanceItem>{
-                    new BalanceItem { Id = Guid.NewGuid().ToString(), Description = "Beer", Price = 6 },
-                    new BalanceItem { Id = Guid.NewGuid().ToString(), Description = "Soda", Price = 5, Amount = 2 },
-                    new BalanceItem { Id = Guid.NewGuid().ToString(), Description = "Big soda", Price = 15.2 },
-                    new BalanceItem { Id = Guid.NewGuid().ToString(), Description = "Payment", Price = -100 }
-                } },
+                new Account { Id = Guid.NewGuid().ToString(), PersonalName = "First Dummy", DoorNumber=1337, Birthday = DateTime.UtcNow, Phone = "0045 6969 6969", TagID = 13371337 },
+                new Account { Id = Guid.NewGuid().ToString(), PersonalName = "Second Dummy", DoorNumber=1337, Birthday = DateTime.UtcNow, Phone = "0045 6969 6969", TagID = 13371337 },
                 new Account { Id = Guid.NewGuid().ToString(), PersonalName = "Third Dummy", DoorNumber=1337, Birthday = DateTime.UtcNow, Phone = "0045 6969 6969", TagID = 13371337 },
                 new Account { Id = Guid.NewGuid().ToString(), PersonalName = "Fourth Dummy", DoorNumber=1337, Birthday = DateTime.UtcNow, Phone = "0045 6969 6969", TagID = 13371337 },
                 new Account { Id = Guid.NewGuid().ToString(), PersonalName = "Fifth Dummy", DoorNumber=1337, Birthday = DateTime.UtcNow, Phone = "0045 6969 6969", TagID = 13371337 },
