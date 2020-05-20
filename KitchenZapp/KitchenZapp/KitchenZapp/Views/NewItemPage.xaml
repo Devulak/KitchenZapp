@@ -36,7 +36,7 @@
             <Frame Style="{DynamicResource LightFrame}">
                 <StackLayout>
                     <Label Text="Phone number:" />
-                    <Entry Text="{Binding Item.DoorNumber}" Keyboard="Telephone" />
+                    <Entry Text="{Binding Item.Phone}" Keyboard="Telephone" />
                 </StackLayout>
             </Frame>
             <Frame Style="{DynamicResource LightFrame}">

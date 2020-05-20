@@ -7,6 +7,7 @@
              x:Class="KitchenZapp.App">
     <Application.Resources>
         <ResourceDictionary>
+            <Color x:Key="NavigationPrimaryTest">#2196F3</Color>
 
             <Style x:Key="RoundFrame" TargetType="Frame">
                 <Setter Property="CornerRadius" Value="5" />
