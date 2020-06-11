@@ -9,18 +9,18 @@ namespace KitchenZapp.Services
 {
     public class MockDataStore : IDataStore<Account>
     {
-        readonly List<Account> items;
+        private readonly List<Account> items;
 
         public MockDataStore()
         {
             items = new List<Account>()
             {
-                new Account { Id = Guid.NewGuid().ToString(), PersonalName = "First Dummy", DoorNumber=1337, Birthday = DateTime.UtcNow, Phone = "0045 6969 6969", TagID = 13371337 },
-                new Account { Id = Guid.NewGuid().ToString(), PersonalName = "Second Dummy", DoorNumber=1337, Birthday = DateTime.UtcNow, Phone = "0045 6969 6969", TagID = 13371337 },
-                new Account { Id = Guid.NewGuid().ToString(), PersonalName = "Third Dummy", DoorNumber=1337, Birthday = DateTime.UtcNow, Phone = "0045 6969 6969", TagID = 13371337 },
-                new Account { Id = Guid.NewGuid().ToString(), PersonalName = "Fourth Dummy", DoorNumber=1337, Birthday = DateTime.UtcNow, Phone = "0045 6969 6969", TagID = 13371337 },
-                new Account { Id = Guid.NewGuid().ToString(), PersonalName = "Fifth Dummy", DoorNumber=1337, Birthday = DateTime.UtcNow, Phone = "0045 6969 6969", TagID = 13371337 },
-                new Account { Id = Guid.NewGuid().ToString(), PersonalName = "Sixth Dummy", DoorNumber=1337, Birthday = DateTime.UtcNow, Phone = "0045 6969 6969", TagID = 13371337 }
+                new Account { Id = 1, PersonalName = "First Dummy", DoorNumber=1337, Birthday = DateTime.UtcNow, Phone = "0045 6969 6969", TagID = 13371337 },
+                new Account { Id = 2, PersonalName = "Second Dummy", DoorNumber=1337, Birthday = DateTime.UtcNow, Phone = "0045 6969 6969", TagID = 13371337 },
+                new Account { Id = 3, PersonalName = "Third Dummy", DoorNumber=1337, Birthday = DateTime.UtcNow, Phone = "0045 6969 6969", TagID = 13371337 },
+                new Account { Id = 4, PersonalName = "Fourth Dummy", DoorNumber=1337, Birthday = DateTime.UtcNow, Phone = "0045 6969 6969", TagID = 13371337 },
+                new Account { Id = 5, PersonalName = "Fifth Dummy", DoorNumber=1337, Birthday = DateTime.UtcNow, Phone = "0045 6969 6969", TagID = 13371337 },
+                new Account { Id = 6, PersonalName = "Sixth Dummy", DoorNumber=1337, Birthday = DateTime.UtcNow, Phone = "0045 6969 6969", TagID = 13371337 }
             };
         }
 
@@ -40,7 +40,7 @@ namespace KitchenZapp.Services
             return await Task.FromResult(true);
         }
 
-        public async Task<bool> DeleteItemAsync(string id)
+        public async Task<bool> DeleteItemAsync(int id)
         {
             var oldItem = items.Where((Account arg) => arg.Id == id).FirstOrDefault();
             items.Remove(oldItem);
@@ -48,7 +48,7 @@ namespace KitchenZapp.Services
             return await Task.FromResult(true);
         }
 
-        public async Task<Account> GetItemAsync(string id)
+        public async Task<Account> GetItemAsync(int id)
         {
             return await Task.FromResult(items.FirstOrDefault(s => s.Id == id));
         }

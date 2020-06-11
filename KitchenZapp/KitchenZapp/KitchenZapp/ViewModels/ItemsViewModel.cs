@@ -23,7 +23,7 @@ namespace KitchenZapp.ViewModels
 
             MessagingCenter.Subscribe<NewItemPage, Account>(this, "AddItem", async (obj, item) =>
             {
-                var newItem = item as Account;
+                var newItem = item;
                 Items.Add(newItem);
                 await DataStore.AddItemAsync(newItem);
             });

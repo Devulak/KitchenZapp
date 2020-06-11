@@ -8,7 +8,7 @@ namespace KitchenZapp.Models
 {
     public class Account : ModelBase
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
         public string PersonalName { get; set; }
         public int DoorNumber { get; set; }
         public DateTime Birthday { get; set; }
