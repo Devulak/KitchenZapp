@@ -16,7 +16,7 @@ namespace KitchenZapp
         {
             InitializeComponent();
 
-            DependencyService.Register<MockDataStore>();
+            DependencyService.Register<SimpleDataStore>();
             MainPage = new AppShell();
         }
 

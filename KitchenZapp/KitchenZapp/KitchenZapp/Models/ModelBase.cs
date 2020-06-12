@@ -6,6 +6,7 @@ using System.Text;
 
 namespace KitchenZapp.Models
 {
+    [Serializable]
     public abstract class ModelBase : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;

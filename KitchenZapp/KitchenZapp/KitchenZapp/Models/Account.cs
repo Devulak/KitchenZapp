@@ -6,6 +6,7 @@ using System.Linq;
 
 namespace KitchenZapp.Models
 {
+    [Serializable]
     public class Account : ModelBase
     {
         public int Id { get; set; }

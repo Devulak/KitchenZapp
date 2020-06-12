@@ -85,6 +85,10 @@ namespace KitchenZapp.ViewModels
                     Account.BalanceItems.Add(balanceItemViewModel.BalanceItem);
                 }
             }
+            if (Items.Count > 0)
+            {
+                DataStore.UpdateItemAsync(Account);
+            }
         }
     }
 }

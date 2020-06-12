@@ -3,6 +3,7 @@ using System.ComponentModel;
 
 namespace KitchenZapp.Models
 {
+    [Serializable]
     public class BalanceItem : ModelBase
     {
         public string Id { get; set; }
